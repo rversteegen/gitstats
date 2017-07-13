@@ -550,7 +550,7 @@ class GitDataCollector(DataCollector):
         extra = ''
         if conf['linear_linestats']:
             extra = '--first-parent -m'
-        lines = getpipeoutput(['git log --shortstat %s --pretty=format:"%%at %%aN" %s' % (extra, getlogrange('HEAD'))]).split('\n')
+        lines = getpipeoutput(['git log --shortstat --ignore-space-change %s --pretty=format:"%%at %%aN" %s' % (extra, getlogrange('HEAD'))]).split('\n')
         lines.reverse()
         files = 0; inserted = 0; deleted = 0; total_lines = 0
         author = None
@@ -604,7 +604,7 @@ class GitDataCollector(DataCollector):
         # Similar to the above, but never use --first-parent
         # (we need to walk through every commit to know who
         # committed what, not just through mainline)
-        lines = getpipeoutput(['git log --shortstat --date-order --pretty=format:"%%at %%aN" %s' % (getlogrange('HEAD'))]).split('\n')
+        lines = getpipeoutput(['git log --shortstat --ignore-space-change --date-order --pretty=format:"%%at %%aN" %s' % (getlogrange('HEAD'))]).split('\n')
         lines.reverse()
         files = 0; inserted = 0; deleted = 0
         author = None
